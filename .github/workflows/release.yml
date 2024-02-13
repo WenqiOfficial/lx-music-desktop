@@ -71,6 +71,11 @@ jobs:
           cd build
           Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
 
+      - name: Upload Artifact
+        uses: ./.github/actions/upload-artifact
+        env:
+          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
+
 
   Windows_7:
     name: Windows
@@ -109,6 +114,11 @@ jobs:
           cd build
           Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
 
+      - name: Upload Artifact
+        uses: ./.github/actions/upload-artifact
+        env:
+          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
+
   Mac:
     name: Mac
     runs-on: macos-latest
@@ -142,6 +152,11 @@ jobs:
         run: |
           cd build
           md5 *.dmg
+
+      - name: Upload Artifact
+        uses: ./.github/actions/upload-artifact
+        env:
+          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
 
   Linux:
     name: Linux
@@ -180,3 +195,8 @@ jobs:
         run: |
           cd build
           md5sum *.deb *.rpm *.pacman *.AppImage
+          
+      - name: Upload Artifact
+        uses: ./.github/actions/upload-artifact
+        env:
+          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
